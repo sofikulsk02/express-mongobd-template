@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "build": "npx tsc -b",
     "dev": "npm run build && node dist/index.js",
     "start": "npm run build && npm run serve",
     "serve": "node -r dotenv/config dist/index.js",
-    "test": "jest"
+    "test": "jest",
+    "prettier:base": "prettier --parser typescript --single-quote",
+    "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
+    "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\"",
+    "lint": "eslint \"src/**\""
   },
   "keywords": [],
   "author": "",
@@ -43,6 +46,12 @@
     "globals": "^16.5.0",
     "jest": "^30.2.0",
     "ts-node": "^10.9.2",
+    "prettier": "^3.7.3",
+    "jiti": "^2.5.1",
+    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "@typescript-eslint/parser": "^8.48.0",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react": "^7.37.5",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.3"
   }

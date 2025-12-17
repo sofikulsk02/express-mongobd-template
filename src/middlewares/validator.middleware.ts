@@ -4,12 +4,11 @@ import { ZodSchema } from 'zod';
 import { BadRequestError } from './../core/ApiError';
 import { isProduction } from '../config.js';
 import { ValidationSource } from './../helpers/validator';
-import logger from '../core/logger';
 
 type ValidationErrorDetail = {
     field: string;
     message: string;
-    value?: any;
+    value?: unknown;
 };
 
 const formatFieldName = (path: (string | number)[]): string => {
@@ -31,8 +30,8 @@ const getReadableErrorMessage = (
     code: string,
     path: (string | number)[],
     message: string,
-    received?: any,
-    expected?: any,
+    received?: unknown,
+    expected?: string[],
 ): string => {
     const fieldName = formatFieldName(path);
 
@@ -123,7 +122,7 @@ type ZodSafeError = {
     path: string[];
     code: string;
     message: string;
-    expected: any;
+    expected: string[];
 };
 
 export const validator = (
@@ -137,10 +136,10 @@ export const validator = (
             const errors: ZodSafeError[] = JSON.parse(String(result.error));
             const validationErrors: ValidationErrorDetail[] = errors.map(
                 (err: {
-                    path: any[];
+                    path: string[];
                     code: string;
                     message: string;
-                    expected: any;
+                    expected: string[];
                 }) => ({
                     field: formatFieldName(err.path),
                     message: getReadableErrorMessage(
@@ -152,7 +151,7 @@ export const validator = (
                     ),
                     ...(!isProduction && {
                         value: err.path.reduce(
-                            (obj: any, key: string | number) => obj?.[key],
+                            (obj: Record<string, unknown>, key: string | number) => obj?.[key],
                             req.body,
                         ),
                     }),

@@ -6,9 +6,9 @@ import refreshTokenRouter from './token';
 
 const router = Router();
 
-router.use('/', signupRoute);
-router.use('/', signinRoute);
-router.use('/', signoutRoute);
+router.use('/signup', signupRoute);
+router.use('/signin', signinRoute);
+router.use('/signout', signoutRoute);
 router.use('/token', refreshTokenRouter);
 
 export default router;

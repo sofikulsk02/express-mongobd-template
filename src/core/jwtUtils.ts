@@ -1,7 +1,7 @@
 import path from 'path';
 import { readFile } from 'fs';
 import { promisify } from 'util';
-import { sign, verify } from 'jsonwebtoken';
+import { sign, verify, TokenExpiredError as JwtTokenExpiredError } from 'jsonwebtoken';
 import { InternalError, BadTokenError, TokenExpiredError } from './ApiError';
 
 /*
@@ -53,7 +53,7 @@ async function readPrivateKey(): Promise<string> {
 async function encode(payload: JwtPayload): Promise<string> {
     const cert = await readPrivateKey();
     if (!cert) throw new InternalError('Token generation failure');
-    // @ts-ignore
+    // @ts-expect-error cert is valid
     return promisify(sign)({ ...payload }, cert, { algorithm: 'RS256' });
 }
 
@@ -63,10 +63,12 @@ async function encode(payload: JwtPayload): Promise<string> {
 async function validate(token: string): Promise<JwtPayload> {
     const cert = await readPublicKey();
     try {
-        // @ts-ignore
+        // @ts-expect-error cert is valid
         return (await promisify(verify)(token, cert)) as JwtPayload;
-    } catch (e: any) {
-        if (e && e.name === 'TokenExpiredError') throw new TokenExpiredError();
+    } catch (e) {
+        if (e instanceof JwtTokenExpiredError) {
+            throw new TokenExpiredError();
+        }
         // throws error if the token has not been encrypted by the private key
         throw new BadTokenError();
     }
@@ -78,11 +80,11 @@ async function validate(token: string): Promise<JwtPayload> {
 async function decode(token: string): Promise<JwtPayload> {
     const cert = await readPublicKey();
     try {
-        // @ts-ignore
+        // @ts-expect-error cert is valid
         return (await promisify(verify)(token, cert, {
             ignoreExpiration: true,
         })) as JwtPayload;
-    } catch (e) {
+    } catch (_e) {
         throw new BadTokenError();
     }
 }

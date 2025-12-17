@@ -15,7 +15,7 @@ import { ValidationSource } from '../../helpers/validator';
 const router = Router();
 
 router.post(
-    '/signup',
+    '/',
     validator(schema.signup, ValidationSource.BODY),
     asyncHandler(async (req, res) => {
         const user = await UserRepo.findByEmail(req.body.email);

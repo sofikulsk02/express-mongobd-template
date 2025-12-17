@@ -3,7 +3,7 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (_req, res) => {
     new SuccessMsgResponse('The server is healthy and running.').send(res);
 });
 

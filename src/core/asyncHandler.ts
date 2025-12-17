@@ -4,7 +4,7 @@ type AsyncFunction<Req extends Request = Request> = (
     req: Req,
     res: Response,
     next: NextFunction
-) => Promise<any>;
+) => Promise<void>;
 
 export function asyncHandler<Req extends Request = Request>(
     execution: AsyncFunction<Req>

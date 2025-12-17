@@ -16,7 +16,7 @@ export async function connectDB() {
     };
     mongoose.set('strictQuery', true);
 
-    function setRunValidators(this: Query<any, any>) {
+    function setRunValidators(this: Query<unknown, unknown>) {
         this.setOptions({ runValidators: true });
     }
 
