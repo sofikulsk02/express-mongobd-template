@@ -8,7 +8,7 @@ import authRoutes from "./auth";
 
 const router = Router();
 
-router.use('/health', healthRoutes);
+router.use('/', healthRoutes);
 
 router.use(apiKeyMiddleware);
 

@@ -6,8 +6,6 @@ export const DOCUMENT_NAME = 'ApiKey';
 export const COLLECTION_NAME = 'api_keys';
 
 
-
-
 const schema = new Schema<ApiKey>(
     {
         key: {

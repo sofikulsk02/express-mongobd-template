@@ -27,7 +27,6 @@ export async function connectDB() {
         schema.pre(/^update/, setRunValidators);
     });
     try {
-        logger.debug(dbURI);
         await mongoose.connect(dbURI, options);
         logger.info('Mongoose connection established');
     } catch (err) {

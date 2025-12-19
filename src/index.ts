@@ -17,7 +17,6 @@ async function start() {
     try {
         await connectDB(); // Connect DB first
         logger.info('Database connected');
-
         logger.info('App loaded');
 
         app.listen(port, () => {

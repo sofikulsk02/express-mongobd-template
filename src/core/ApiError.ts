@@ -23,7 +23,7 @@ export enum ErrorType {
 }
 
 export abstract class ApiError extends Error {
-    constructor(public type: ErrorType, public message: string = 'error') {
+    constructor(public type: ErrorType, public message: string = 'error', public success: boolean) {
         super(type);
     }
 
@@ -59,60 +59,60 @@ export abstract class ApiError extends Error {
 
 export class AuthFailureError extends ApiError {
     constructor(message = 'Invalid Credentials') {
-        super(ErrorType.UNAUTHORIZED, message);
+        super(ErrorType.UNAUTHORIZED, message, false);
     }
 }
 
 export class InternalError extends ApiError {
     constructor(message = 'Internal error') {
-        super(ErrorType.INTERNAL, message);
+        super(ErrorType.INTERNAL, message, false);
     }
 }
 
 export class BadRequestError extends ApiError {
     constructor(message = 'Bad Request') {
-        super(ErrorType.BAD_REQUEST, message);
+        super(ErrorType.BAD_REQUEST, message, false);
     }
 }
 
 export class NotFoundError extends ApiError {
     constructor(message = 'Not Found') {
-        super(ErrorType.NOT_FOUND, message);
+        super(ErrorType.NOT_FOUND, message, false);
     }
 }
 
 export class ForbiddenError extends ApiError {
     constructor(message = 'Permission denied') {
-        super(ErrorType.FORBIDDEN, message);
+        super(ErrorType.FORBIDDEN, message, false);
     }
 }
 
 export class NoEntryError extends ApiError {
     constructor(message = "Entry don't exists") {
-        super(ErrorType.NO_ENTRY, message);
+        super(ErrorType.NO_ENTRY, message, false);
     }
 }
 
 export class BadTokenError extends ApiError {
     constructor(message = 'Token is not valid') {
-        super(ErrorType.BAD_TOKEN, message);
+        super(ErrorType.BAD_TOKEN, message, false);
     }
 }
 
 export class TokenExpiredError extends ApiError {
     constructor(message = 'Token is expired') {
-        super(ErrorType.TOKEN_EXPIRED, message);
+        super(ErrorType.TOKEN_EXPIRED, message, false);
     }
 }
 
 export class NoDataError extends ApiError {
     constructor(message = 'No data available') {
-        super(ErrorType.NO_DATA, message);
+        super(ErrorType.NO_DATA, message, false);
     }
 }
 
 export class AccessTokenError extends ApiError {
     constructor(message = 'Invalid access token') {
-        super(ErrorType.ACCESS_TOKEN, message);
+        super(ErrorType.ACCESS_TOKEN, message, false);
     }
 }

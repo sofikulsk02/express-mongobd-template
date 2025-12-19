@@ -22,6 +22,7 @@ abstract class ApiResponse {
         protected statusCode: StatusCode,
         protected status: ResponseStatus,
         protected message: string,
+        protected success: boolean
     ) { }
 
     protected prepare<T extends ApiResponse>(
@@ -52,13 +53,13 @@ abstract class ApiResponse {
 
 export class AuthFailureResponse extends ApiResponse {
     constructor(message = 'Authentication Failure') {
-        super(StatusCode.FAILURE, ResponseStatus.UNAUTHORIZED, message);
+        super(StatusCode.FAILURE, ResponseStatus.UNAUTHORIZED, message, false);
     }
 }
 
 export class NotFoundResponse extends ApiResponse {
     constructor(message = 'Not Found') {
-        super(StatusCode.FAILURE, ResponseStatus.NOT_FOUND, message);
+        super(StatusCode.FAILURE, ResponseStatus.NOT_FOUND, message, false);
     }
 
     send(res: Response, headers: { [key: string]: string } = {}): Response {
@@ -68,37 +69,37 @@ export class NotFoundResponse extends ApiResponse {
 
 export class ForbiddenResponse extends ApiResponse {
     constructor(message = 'Forbidden') {
-        super(StatusCode.FAILURE, ResponseStatus.FORBIDDEN, message);
+        super(StatusCode.FAILURE, ResponseStatus.FORBIDDEN, message, false);
     }
 }
 
 export class BadRequestResponse extends ApiResponse {
     constructor(message = 'Bad Parameters') {
-        super(StatusCode.FAILURE, ResponseStatus.BAD_REQUEST, message);
+        super(StatusCode.FAILURE, ResponseStatus.BAD_REQUEST, message, false);
     }
 }
 
 export class InternalErrorResponse extends ApiResponse {
     constructor(message = 'Internal Error') {
-        super(StatusCode.FAILURE, ResponseStatus.INTERNAL_ERROR, message);
+        super(StatusCode.FAILURE, ResponseStatus.INTERNAL_ERROR, message, false);
     }
 }
 
 export class SuccessMsgResponse extends ApiResponse {
     constructor(message: string) {
-        super(StatusCode.SUCCESS, ResponseStatus.SUCCESS, message);
+        super(StatusCode.SUCCESS, ResponseStatus.SUCCESS, message, true);
     }
 }
 
 export class FailureMsgResponse extends ApiResponse {
     constructor(message: string) {
-        super(StatusCode.FAILURE, ResponseStatus.SUCCESS, message);
+        super(StatusCode.FAILURE, ResponseStatus.SUCCESS, message, false);
     }
 }
 
 export class SuccessResponse<T> extends ApiResponse {
     constructor(message: string, private data: T) {
-        super(StatusCode.SUCCESS, ResponseStatus.SUCCESS, message);
+        super(StatusCode.SUCCESS, ResponseStatus.SUCCESS, message, true);
     }
 
     send(res: Response, headers: { [key: string]: string } = {}): Response {
@@ -114,6 +115,7 @@ export class AccessTokenErrorResponse extends ApiResponse {
             StatusCode.INVALID_ACCESS_TOKEN,
             ResponseStatus.UNAUTHORIZED,
             message,
+            false
         );
     }
 
@@ -129,7 +131,7 @@ export class TokenRefreshResponse extends ApiResponse {
         private accessToken: string,
         private refreshToken: string,
     ) {
-        super(StatusCode.SUCCESS, ResponseStatus.SUCCESS, message);
+        super(StatusCode.SUCCESS, ResponseStatus.SUCCESS, message, true);
     }
 
     send(res: Response, headers: { [key: string]: string } = {}): Response {
