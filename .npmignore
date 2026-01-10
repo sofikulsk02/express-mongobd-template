@@ -1,0 +1,41 @@
+# Source files (we use template folder instead)
+src/
+dist/
+
+# Development files
+node_modules/
+coverage/
+logs/
+*.log
+npm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Development config files (not needed for npm package)
+tsconfig.json
+tsconfig.tsbuildinfo
+nodemon.json
+jest.config.ts
+eslint.config.mts
+Dockerfile
+
+# Environment files
+.env
+.env.*
+
+# Keys
+keys/
+
+# Misc
+*.md
+!template/**/*.md
