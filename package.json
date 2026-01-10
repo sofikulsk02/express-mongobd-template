@@ -1,47 +1,47 @@
 {
-    "name": "create-express-mongo-ts",
-    "version": "1.2.0",
-    "description": "Create Express + MongoDB applications with TypeScript, authentication, and best practices out of the box",
-    "main": "bin/cli.js",
-    "bin": {
-        "create-express-mongo-ts": "./bin/cli.js"
-    },
-    "files": [
-        "bin",
-        "template"
-    ],
-    "scripts": {
-        "test": "echo \"No tests yet\""
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/sofikulsk02/express-mongobd-template.git"
-    },
-    "keywords": [
-        "express",
-        "mongodb",
-        "mongoose",
-        "typescript",
-        "template",
-        "boilerplate",
-        "rest-api",
-        "authentication",
-        "jwt",
-        "create-express-mongo",
-        "cli"
-    ],
-    "author": "sofikulsk02 <https://github.com/sofikulsk02>",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/sofikulsk02/express-mongobd-template/issues"
-    },
-    "homepage": "https://github.com/sofikulsk02/express-mongobd-template#readme",
-    "type": "module",
-    "engines": {
-        "node": ">=18.0.0"
-    },
-    "dependencies": {
-        "chalk": "^5.3.0",
-        "inquirer": "^9.2.12"
-    }
+  "name": "create-express-mongo-ts",
+  "version": "1.3.0",
+  "description": "Create Express + MongoDB applications with TypeScript, authentication, and best practices out of the box",
+  "main": "bin/cli.js",
+  "bin": {
+    "create-express-mongo-ts": "./bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "template"
+  ],
+  "scripts": {
+    "test": "echo \"No tests yet\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sofikulsk02/express-mongobd-template.git"
+  },
+  "keywords": [
+    "express",
+    "mongodb",
+    "mongoose",
+    "typescript",
+    "template",
+    "boilerplate",
+    "rest-api",
+    "authentication",
+    "jwt",
+    "create-express-mongo",
+    "cli"
+  ],
+  "author": "sofikulsk02 <https://github.com/sofikulsk02>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sofikulsk02/express-mongobd-template/issues"
+  },
+  "homepage": "https://github.com/sofikulsk02/express-mongobd-template#readme",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "inquirer": "^9.2.12"
+  }
 }
