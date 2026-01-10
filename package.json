@@ -1,10 +1,10 @@
 {
-    "name": "create-express-mongo",
+    "name": "create-express-mongo-ts",
     "version": "1.0.0",
     "description": "Create Express + MongoDB applications with TypeScript, authentication, and best practices out of the box",
     "main": "bin/cli.js",
     "bin": {
-        "create-express-mongo": "./bin/cli.js"
+        "create-express-mongo-ts": "./bin/cli.js"
     },
     "files": [
         "bin",
