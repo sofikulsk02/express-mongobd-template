@@ -1,14 +1,14 @@
-# create-express-mongo
+# create-express-mongo-ts
 
 Create Express + MongoDB applications with TypeScript, authentication, and best practices out of the box.
 
-[![npm version](https://img.shields.io/npm/v/create-express-mongo.svg)](https://www.npmjs.com/package/create-express-mongo)
+[![npm version](https://img.shields.io/npm/v/create-express-mongo-ts.svg)](https://www.npmjs.com/package/create-express-mongo-ts)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Quick Start
 
 ```bash
-npx create-express-mongo my-app
+npx create-express-mongo-ts my-app
 cd my-app
 npm install
 cp .env.example .env
