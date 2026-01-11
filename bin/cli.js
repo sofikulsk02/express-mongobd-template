@@ -21,49 +21,82 @@ const styles = {
   heading: (msg) => chalk.bold(msg),
 };
 
+// Check if running in interactive mode
+function isInteractive() {
+  return process.stdin.isTTY && process.stdout.isTTY;
+}
+
 async function createExpressMongo() {
   console.log(chalk.cyan.bold("\n🚀 Create Express MongoDB TypeScript App\n"));
 
-  // Get project name from command line or prompt
+  // Get project name from command line
   let projectName = process.argv[2];
 
-  const answers = await inquirer.prompt([
-    {
-      type: "input",
-      name: "appName",
-      message: "What is your app name?",
-      default: projectName || "my-express-mongo-app",
-      validate(input) {
-        if (!input.trim()) return "App name cannot be empty";
-        if (!/^[a-z0-9-_]+$/i.test(input))
-          return "App name can only contain letters, numbers, hyphens and underscores";
-        return true;
+  let answers;
+
+  // If not interactive or project name provided, use defaults
+  if (!isInteractive()) {
+    if (!projectName) {
+      console.log(styles.error("✖ Please provide a project name:"));
+      console.log(
+        `  ${styles.command("npx create-express-mongo-ts")} ${chalk.green(
+          "<project-name>"
+        )}`
+      );
+      console.log(`\nExample:`);
+      console.log(`  ${styles.command("npx create-express-mongo-ts my-app")}`);
+      process.exit(1);
+    }
+
+    console.log(
+      styles.warning("Running in non-interactive mode with defaults...\n")
+    );
+    answers = {
+      appName: projectName,
+      gitProvider: "github",
+      initGit: true,
+      installDeps: true,
+    };
+  } else {
+    // Interactive mode - use inquirer prompts
+    answers = await inquirer.prompt([
+      {
+        type: "input",
+        name: "appName",
+        message: "What is your app name?",
+        default: projectName || "my-express-mongo-app",
+        validate(input) {
+          if (!input.trim()) return "App name cannot be empty";
+          if (!/^[a-z0-9-_]+$/i.test(input))
+            return "App name can only contain letters, numbers, hyphens and underscores";
+          return true;
+        },
       },
-    },
-    {
-      type: "list",
-      name: "gitProvider",
-      message: "Which Git provider do you want to use?",
-      choices: [
-        { name: "GitHub", value: "github" },
-        { name: "GitLab", value: "gitlab" },
-        { name: "None", value: "none" },
-      ],
-      default: "github",
-    },
-    {
-      type: "confirm",
-      name: "initGit",
-      message: "Initialize a git repository?",
-      default: true,
-    },
-    {
-      type: "confirm",
-      name: "installDeps",
-      message: "Install dependencies automatically?",
-      default: true,
-    },
-  ]);
+      {
+        type: "list",
+        name: "gitProvider",
+        message: "Which Git provider do you want to use?",
+        choices: [
+          { name: "GitHub", value: "github" },
+          { name: "GitLab", value: "gitlab" },
+          { name: "None", value: "none" },
+        ],
+        default: "github",
+      },
+      {
+        type: "confirm",
+        name: "initGit",
+        message: "Initialize a git repository?",
+        default: true,
+      },
+      {
+        type: "confirm",
+        name: "installDeps",
+        message: "Install dependencies automatically?",
+        default: true,
+      },
+    ]);
+  }
 
   createApp(answers);
 }
